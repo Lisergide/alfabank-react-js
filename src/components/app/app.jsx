@@ -56,16 +56,22 @@ class App extends React.Component {
                 <Heading size='m'>Привет, меня зовут {this.props.user.name}!</Heading>
                 <Heading size='m'>И я могу отображать новости за { this.props.news.year} год!</Heading>
                 <div className="row" style={ { marginLeft: 0, marginBottom: '15px' } }>
-                    <div className="col-xs-2">
+                    <div className="col-md-4">
                         <Input 
                             size='m' 
-                            label='Предложите новость' 
+                            label='Предложите новость'
+                            width='available' 
                             ref={ (input) => {
                                 this.inputNewsTitle = input;
                             } } />
                     </div>
-                    <div className="col-xs-2">
-                        <Button size='m' view='extra' onClick={() => this.handleClick()}>
+                    <div className="col-md-4">
+                        <Button 
+                            size='m' 
+                            view='extra'
+                            width='available'
+                            onClick={() => this.handleClick()}
+                        >
                             Добавить новость
                         </Button>
                     </div>
