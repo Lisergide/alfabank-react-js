@@ -6,6 +6,14 @@ import * as newsActions from '../../action/newsActions';
 
 import News from '../news/news';
 
+import Heading from 'arui-feather/heading';
+import Button from 'arui-feather/button';
+import Input from 'arui-feather/input';
+import Spin from 'arui-feather/spin';
+// import Icon from 'arui-feather/icon/brand/bank-2449';
+
+import alfaLogo from "../../assets/logo-alfabank-cyr-h.svg";
+
 function mapStateToProps(state) {
     const { user, news } = state;
     return { user, news };
@@ -18,9 +26,12 @@ function mapDispatchToProps(dispatch) {
 }
 
 class App extends React.Component {
-    constructor(props) {
+    /*constructor(props) {
         super(props);
-    }
+
+        // this.inputNewsTitle;
+
+    }*/
 
     componentDidMount() {
         this.props.newsActions.showNews();
@@ -28,27 +39,35 @@ class App extends React.Component {
     render() {
         if (this.props.news.isBusy) {
             return (
-                <div>
-                    Loading...
-                </div>
+              <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                <Button
+                  icon={<Spin size='l' visible={true} />}
+                  size='l'
+                >
+                  Загрузка...
+                </Button>
+              </div>
             );
         }
 
         return (
             <div className="container">
-                <h1>ReactJs Разработка от АльфаБанк</h1>
-                <p className="lead">Привет, меня зовут { this.props.user.name }!</p>
-                <p className="lead">И я могу отобразить новости за { this.props.news.year} год!</p>
-                <div className="row" style={ { marginLeft: 0 } }>
+                <Heading size='l'>ReactJs Разработка от <img src={ alfaLogo } alt='alfa-logo' style={{ width: '270px' }} /></Heading>
+                <Heading size='m'>Привет, меня зовут {this.props.user.name}!</Heading>
+                <Heading size='m'>И я могу отображать новости за { this.props.news.year} год!</Heading>
+                <div className="row" style={ { marginLeft: 0, marginBottom: '15px' } }>
                     <div className="col-xs-2">
-                        <input type="text" ref={(input) => {
-                            this.inputNewsTitle = input;
-                        }} />
+                        <Input 
+                            size='m' 
+                            label='Предложите новость' 
+                            ref={ (input) => {
+                                this.inputNewsTitle = input;
+                            } } />
                     </div>
                     <div className="col-xs-2">
-                        <button onClick={() => this.handleClick()}>
+                        <Button size='m' view='extra' onClick={() => this.handleClick()}>
                             Добавить новость
-                        </button>
+                        </Button>
                     </div>
                 </div>
 
